@@ -37,3 +37,4 @@ Route::get('/services', 'PagesController@services');
 Route::resource('posts', 'PostsController');
 
 
+

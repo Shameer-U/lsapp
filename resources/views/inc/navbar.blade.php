@@ -12,12 +12,17 @@
           <a class="nav-link" href="/about">About</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/services">Services</a>
+            <a class="nav-link" href="{{ url('/services') }}">Services</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/posts">Blog</a>
           </li>
        
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('/posts/create') }}">Create Post</a>
+        </li>
       </ul>
       
     </div>
