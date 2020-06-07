@@ -20,8 +20,19 @@
        
       </ul>
       <ul class="navbar-nav">
+
+        @if (empty(session('id')))
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/users') }}">Login</a>
+          </li>
+        @else
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/users/logout') }}">Logout</a>
+          </li>
+        @endif
+       
         <li class="nav-item">
-          <a class="nav-link" href="{{ url('/posts/create') }}">Create Post</a>
+          <a class="nav-link" href="{{ url('/login/create') }}">Create Post</a>
         </li>
       </ul>
       

@@ -39,5 +39,7 @@ Route::resource('posts', 'PostsController');
 Route::post('/posts/{id}/update_custom', 'PostsController@update_custom');
 Route::get('/posts/{id}/delete_custom', 'PostsController@delete_custom');
 
-
+Route::get('/users', 'UsersController@index');
+Route::post('/users/login', 'UsersController@login');
+Route::get('/users/logout', 'UsersController@logout');
 
