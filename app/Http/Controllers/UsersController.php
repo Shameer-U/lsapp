@@ -35,7 +35,8 @@ class UsersController extends Controller
             $request->session()->put('email', $users[0]->email);
             $request->session()->put('password', $users[0]->password);
 
-            return redirect('/posts')->with('success', 'Login successfull');
+            //return redirect('/posts')->with('success', 'Login successfull');
+            return redirect('/dashboard')->with('success', 'Login successfull');
         } 
         else 
         {

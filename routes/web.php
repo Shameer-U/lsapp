@@ -43,3 +43,5 @@ Route::get('/users', 'UsersController@index');
 Route::post('/users/login', 'UsersController@login');
 Route::get('/users/logout', 'UsersController@logout');
 
+Route::get('/dashboard', 'DashboardController@index');
+
