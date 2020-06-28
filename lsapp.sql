@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2020 at 09:56 PM
+-- Generation Time: Jun 28, 2020 at 10:21 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -56,7 +56,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2019_08_19_000000_create_failed_jobs_table', 1),
 (3, '2020_04_19_174458_create_posts_table', 1),
-(4, '2020_06_21_165114_add_user_id_to_posts', 2);
+(4, '2020_06_21_165114_add_user_id_to_posts', 2),
+(5, '2020_06_28_162657_add_cover_image_to_posts', 3);
 
 -- --------------------------------------------------------
 
@@ -70,17 +71,16 @@ CREATE TABLE `posts` (
   `body` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `cover_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `title`, `body`, `created_at`, `updated_at`, `user_id`) VALUES
-(1, 'post one edit', 'this is post one edited', '2020-05-31 13:25:51', '2020-05-31 13:26:33', 1),
-(2, 'User id', 'posts with user_id', '2020-06-21 11:59:25', '2020-06-21 11:59:25', 1),
-(3, 'first post shalu', 'first post from shalu', '2020-06-21 14:07:06', '2020-06-21 14:07:06', 2);
+INSERT INTO `posts` (`id`, `title`, `body`, `created_at`, `updated_at`, `user_id`, `cover_image`) VALUES
+(4, 'Post One Test', '<p><em><strong>post with image</strong></em></p>', '2020-06-28 14:45:25', '2020-06-28 14:45:25', 1, 'Screenshot (3)_20200628201525.png');
 
 -- --------------------------------------------------------
 
@@ -150,7 +150,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `posts`
