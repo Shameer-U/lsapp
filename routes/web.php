@@ -36,12 +36,16 @@ Route::get('/services', 'PagesController@services');
 
 Route::resource('posts', 'PostsController');
 
-Route::post('/posts/{id}/update_custom', 'PostsController@update_custom');
-Route::get('/posts/{id}/delete_custom', 'PostsController@delete_custom');
+Route::post('/posts/{id}/update_custom', 'PostsController1@update_custom');
+Route::get('/posts/{id}/delete_custom', 'PostsController1@delete_custom');
 
-Route::get('/users', 'UsersController@index');
-Route::post('/users/login', 'UsersController@login');
-Route::get('/users/logout', 'UsersController@logout');
+Route::get('/users', 'UsersController1@index');
+Route::post('/users/login', 'UsersController1@login');
+Route::get('/users/logout', 'UsersController1@logout');
 
-Route::get('/dashboard', 'DashboardController@index');
+Route::get('/dashboard', 'DashboardController1@index');
 
+
+Auth::routes();
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');/*changed 'home' to 'dashboard'*/

@@ -10,10 +10,20 @@
    <hr>
    <small>written on {{$post->created_at}} by {{$post->user->name}}{{-- accessing user through post because we added "relationship" between user and post--}}</small>
    <hr>
-   @if(!empty(session('id')))
-        @if(session('id') == $post->user_id)
-            <a href="/posts/{{$post->id}}/edit" class="btn btn-info">Edit</a>
-            <a href="/posts/{{$post->id}}/delete_custom" class="btn btn-danger">Delete</a>
+   @if(!Auth::guest())
+        @if(Auth::user()->id == $post->user_id)
+        <div class="row">
+            <div class="col-md-6">
+               <a href="/posts/{{$post->id}}/edit" class="btn btn-info">Edit</a>
+            </div>
+            <div class="col-md-6">
+                <form action="{{ url('posts/'.$post->id) }}" method="POST" enctype="multipart/form-data" >
+                    <input type="hidden" name="_method" value="DELETE">{{-- method spoofing, changing POST method to DELETE --}}
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">{{-- CSRF token --}}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
         @endif
    @endif
 @endsection

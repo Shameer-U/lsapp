@@ -9,14 +9,12 @@ use DB;
 use Redirect;
 use Session;
 
-class PostsController extends Controller
+class PostsController1 extends Controller
 {
 
     public function __construct()
     {
-       //session wont work inside construct
-       //blocking un authenticated user
-       $this->middleware('auth', ['except' => ['index', 'show']]);
+       //session is not working inside construct
     }
 
     
@@ -47,6 +45,10 @@ class PostsController extends Controller
      */
     public function create()
     {
+        if(empty(Session::get('id')) ){
+            return redirect('/users'); 
+        }
+
         return view('posts.create');
     }
 
@@ -85,7 +87,7 @@ class PostsController extends Controller
         $post = new Post;
         $post->title = $request->input('title');
         $post->body = $request->input('body');
-        $post->user_id = auth()->user()->id;
+        $post->user_id = session('id');
         $post->cover_image = $fileNameToStore;
         $post->save();
 
@@ -113,11 +115,14 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
+        if(empty(Session::get('id')) ){
+            return redirect('/users'); 
+        }
 
         $post =  Post::find($id);
 
         //check for correct user
-        if( auth()->user()->id !== $post->user_id ){
+        if( Session::get('id') !== $post->user_id ){
             return redirect('/posts')->with('error', 'Unauthorized');
         }
 
@@ -132,6 +137,24 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+
+    //custom functions
+    public function update_custom(Request $request, $id)
     {
         $this->validate($request, [
             'title' => 'required',
@@ -166,18 +189,16 @@ class PostsController extends Controller
         return redirect('/posts')->with('success', 'Post Updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete_custom($id)
     {
+        if(empty(Session::get('id')) ){
+            return redirect('/users'); 
+        }
+
         $post = Post::find($id);
 
         //check for correct user
-        if( auth()->user()->id !== $post->user_id ){
+        if( Session::get('id') !== $post->user_id ){
             return redirect('/posts')->with('error', 'Unauthorized');
         }
 
@@ -189,7 +210,5 @@ class PostsController extends Controller
         $post->delete();
         return redirect('/posts')->with('success', 'Post Removed');
     }
-
-    
     
 }
