@@ -33,7 +33,7 @@
 
    <script src="{{ URL::to('src/js/jquery-3.3.1.min.js')}}"></script>
      {{-- <script src="{{ URL::to('src/js/popper.min.js')}}"></script>
-    <script src="{{ URL::to('src/js/bootstrap.min.js')}}"></script> --}}
+    <script src="{{ URL::to('src/js/bootstrap.min.js')}}"></script> --}} {{--bootstrap.js already compiled to 'app.js' and loaded in the header, loading it here affects working--}}
     
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script>
